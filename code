@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Privilege vs. Social Respect: Understanding the Invisible Social Divide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0f172a',
+                            900: '#0b1329',
+                            950: '#050a17',
+                        },
+                        cream: {
+                            50: '#fdfbf7',
+                            100: '#f7f4eb',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Lora', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .reading-font-sm p { font-size: 0.95rem; line-height: 1.75; }
+        .reading-font-md p { font-size: 1.125rem; line-height: 1.85; }
+        .reading-font-lg p { font-size: 1.28rem; line-height: 1.95; }
+        
+        .citation-highlight {
+            animation: highlightPulse 2.5s ease-in-out;
+        }
+        @keyframes highlightPulse {
+            0%, 100% { background-color: transparent; }
+            30%, 70% { background-color: rgba(217, 119, 6, 0.25); }
+        }
+    </style>
+</head>
+<body class="bg-cream-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 font-sans transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- Reading Progress Bar -->
+    <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-amber-500 z-50 transition-all duration-150" style="width: 0%;"></div>
+
+    <!-- Sticky Reader Navbar -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-cream-50/90 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="font-serif font-bold text-lg sm:text-xl text-navy-900 dark:text-slate-100 tracking-tight">Social Perspectives</span>
+                <span class="hidden sm:inline-block text-slate-400">|</span>
+                <span class="hidden sm:inline-block text-xs uppercase tracking-widest text-amber-600 dark:text-amber-400 font-semibold">Sociology & Psychology</span>
+            </div>
+
+            <!-- Interactive Reader Controls -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <!-- Font Size Adjuster -->
+                <div class="flex items-center bg-slate-200/70 dark:bg-slate-800/80 rounded-lg p-1 text-xs font-semibold">
+                    <button id="font-sm" onclick="setFontSize('sm')" class="px-2.5 py-1 rounded hover:bg-white dark:hover:bg-slate-700 transition" title="Small Text">A-</button>
+                    <button id="font-md" onclick="setFontSize('md')" class="px-2.5 py-1 rounded bg-white dark:bg-slate-700 shadow-sm text-amber-600 dark:text-amber-400 font-bold transition" title="Medium Text">A</button>
+                    <button id="font-lg" onclick="setFontSize('lg')" class="px-2.5 py-1 rounded hover:bg-white dark:hover:bg-slate-700 transition" title="Large Text">A+</button>
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-slate-200/70 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 transition text-slate-700 dark:text-slate-200" title="Toggle Light/Dark Theme">
+                    <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-navy-900 text-white py-14 md:py-20 px-4 sm:px-6 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto relative z-10 text-center">
+            <div class="inline-flex items-center space-x-2 bg-amber-500/10 border border-amber-500/20 text-amber-300 px-3 py-1 rounded-full text-xs font-medium mb-6">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                <span>Academic & Sociological Analysis</span>
+            </div>
+            <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 tracking-tight text-slate-100">
+                Beauty Privilege vs. Social Respect: <span class="italic font-normal text-amber-400">Understanding the Invisible Social Divide</span>
+            </h1>
+            <p class="text-slate-300 text-base sm:text-xl font-light max-w-2xl mx-auto mb-8 leading-relaxed">
+                An 11-paragraph comprehensive analysis comparing unearned aesthetic leverage, cognitive biases, earned character, and long-term societal equity.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400 border-t border-slate-800 pt-6 max-w-lg mx-auto">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>11 Paragraphs (9 Min Read)</span>
+                </div>
+                <span>•</span>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>Peer-Reviewed Academic Citations</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Layout -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12 flex-grow">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+            <!-- Sticky Navigation / TOC Sidebar (Desktop) -->
+            <aside class="hidden lg:block lg:col-span-3">
+                <div class="sticky top-24 space-y-6">
+                    <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <h3 class="font-serif font-bold text-xs uppercase tracking-wider text-slate-900 dark:text-slate-100 mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
+                            Table of Contents
+                        </h3>
+                        <nav class="space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
+                            <a href="#para-1" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">1. The Nature of Privilege</a>
+                            <a href="#para-2" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">2. Early Social Foundations</a>
+                            <a href="#para-3" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">3. Cognitive Bias & The Halo Effect</a>
+                            <a href="#para-4" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">4. Labor Market & Economic Advantages</a>
+                            <a href="#para-5" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">5. Defining Social Respect</a>
+                            <a href="#para-6" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">6. Character & Moral Currency</a>
+                            <a href="#para-7" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">7. Durability & Transience</a>
+                            <a href="#para-8" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">8. Depth of Human Relationships</a>
+                            <a href="#para-9" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">9. The Conflation Trap</a>
+                            <a href="#para-10" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">10. Institutional & Cultural Shifts</a>
+                            <a href="#para-11" class="block hover:text-amber-600 dark:hover:text-amber-400 transition py-1">11. Conclusion</a>
+                            <a href="#comparison-table" class="block hover:text-amber-600 dark:hover:text-amber-400 font-semibold text-amber-600 dark:text-amber-400 pt-3 border-t border-slate-100 dark:border-slate-800">Comparison Framework</a>
+                            <a href="#references" class="block hover:text-amber-600 dark:hover:text-amber-400 font-semibold text-slate-700 dark:text-slate-300">Academic References</a>
+                        </nav>
+                    </div>
+
+                    <!-- Quick Key Takeaway Card -->
+                    <div class="bg-amber-50 dark:bg-slate-900/80 p-5 rounded-2xl border border-amber-200/80 dark:border-amber-900/30">
+                        <h4 class="font-semibold text-xs uppercase tracking-wider text-amber-800 dark:text-amber-400 mb-2">Core Summary</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Beauty privilege offers automated, friction-reducing social warmth. However, authentic social respect requires sustained conduct, earning non-fading trust, authority, and true connection.
+                        </p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Article Content (11 Paragraphs) -->
+            <article id="reading-content" class="lg:col-span-9 space-y-6 reading-font-md font-serif text-slate-800 dark:text-slate-200">
+
+                <!-- Paragraph 1 -->
+                <section id="para-1" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">1.</span>
+                        The concept of privilege in contemporary sociology encompasses a wide spectrum of unearned advantages, ranging from socioeconomic capital to institutional access. Among these subtle yet pervasive forms of social leverage is beauty privilege, frequently categorized within academic literature under the paradigm of "lookism" <button onclick="scrollToCitation('cite-lookism')" class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-sans font-bold bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 hover:bg-amber-200 transition" title="View Citation">[1]</button>. Beauty privilege describes the unearned social, economic, and interpersonal benefits routinely extended to individuals whose physical traits align closely with prevailing cultural aesthetic ideals. While beauty privilege significantly shapes daily human interactions, it functions according to a fundamentally different set of social rules than genuine social respect.
+                    </p>
+                </section>
+
+                <!-- Paragraph 2 -->
+                <section id="para-2" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">2.</span>
+                        Beauty privilege manifests at the very earliest stages of human social development. Developmental psychology studies reveal that infants and children who match conventional standards of attractiveness receive increased positive attention, gentler discipline, and heightened encouragement from caregivers and educators alike <button onclick="scrollToCitation('cite-dion')" class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-sans font-bold bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 hover:bg-amber-200 transition" title="View Citation">[2]</button>. This early advantage creates a feedback loop in which aesthetically favored individuals experience reduced social friction from childhood into adolescence. The resulting environment fosters heightened self-assurance, yet this assurance is largely constructed upon external visual validation rather than demonstrated personal capability.
+                    </p>
+                </section>
+
+                <!-- Paragraph 3 -->
+                <section id="para-3" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">3.</span>
+                        At the cognitive level, beauty privilege relies primarily on the "halo effect," a well-documented psychological bias first identified by Edward Thorndike <button onclick="scrollToCitation('cite-thorndike')" class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-sans font-bold bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 hover:bg-amber-200 transition" title="View Citation">[3]</button>. Under the influence of this heuristic, observers who perceive a person as physically attractive automatically project non-aesthetic virtues onto them, assuming higher levels of intelligence, kindness, honesty, and professional competence <button onclick="scrollToCitation('cite-nisbett')" class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-sans font-bold bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 hover:bg-amber-200 transition" title="View Citation">[4]</button>. Because these positive judgments occur automatically and unconsciously, beauty privilege operates without requiring any conscious agreement or intentional effort from either party involved in the interaction.
+                    </p>
+                </section>
+
+                <!-- Callout Quote -->
+                <blockquote class="my-6 p-6 sm:p-8 border-l-4 border-amber-500 bg-amber-500/5 dark:bg-slate-900 rounded-r-2xl italic font-serif text-slate-800 dark:text-slate-200 text-lg sm:text-xl">
+                    "Under the halo effect, physical attractiveness functions as an implicit social key—opening doors and granting assumptions of competence before a single word is even spoken."
+                </blockquote>
+
+                <!-- Paragraph 4 -->
+                <section id="para-4" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">4.</span>
+                        The concrete economic benefits of beauty privilege are clearly documented across global labor markets through what economists term the "beauty premium." Empirical studies demonstrate that physically attractive workers systematically receive higher starting salaries, more frequent promotions, and favorable evaluations during hiring processes when compared to equally qualified peers <button onclick="scrollToCitation('cite-doorley')" class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-sans font-bold bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 hover:bg-amber-200 transition" title="View Citation">[5]</button>. In professional environments, attractive individuals frequently benefit from a broader margin of error, receiving lighter reprimands for mistakes due to implicitly generous interpretations of their motives.
+                    </p>
+                </section>
+
+                <!-- Paragraph 5 -->
+                <section id="para-5" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">5.</span>
+                        In stark contrast to aesthetic leverage, social respect is an active, earned metric grounded in character, conduct, and contribution. Social respect represents a community's evaluated judgment of an individual's ethical integrity, skill, reliability, and selfless behavior toward others. Unlike beauty privilege, which is passively inherited or granted based on superficial visual alignment, genuine respect demands sustained personal effort, moral discipline, and proven reliability over extended periods of time.
+                    </p>
+                </section>
+
+                <!-- Paragraph 6 -->
+                <section id="para-6" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">6.</span>
+                        While beauty privilege functions as an aesthetic shortcut, social respect represents moral and relational capital. Respect cannot be inherited, bought, or projected through visual styling alone; it requires consistent demonstration of competence and ethical clarity within a social ecosystem. Whether in leadership, craftsmanship, or personal friendships, earned respect yields genuine influence and authority—authoritative standing that persists even when visual appearance is disregarded or absent.
+                    </p>
+                </section>
+
+                <!-- Paragraph 7 -->
+                <section id="para-7" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">7.</span>
+                        The fundamental divide between beauty privilege and social respect becomes most evident when examining durability. Beauty privilege is inherently temporary and highly volatile. Because social definitions of physical beauty are closely tied to youth, changing fashion trends, and superficial markers, aesthetic leverage inevitably fades over time. Individuals who rely solely on beauty privilege often experience profound social distress as age or shifting standards erode their unearned advantage.
+                    </p>
+                </section>
+
+                <!-- Paragraph 8 -->
+                <section id="para-8" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">8.</span>
+                        Social respect, on the other hand, possesses long-term stability and resilience. When an individual earns the respect of their peers, colleagues, or community, that respect survives physical changes, aging, and circumstantial shifts. Furthermore, earned respect fosters deep, authentic human connections built on mutual trust. In contrast, beauty privilege often attracts transactional relationships, wherein others seek proximity to an attractive individual for status rather than genuine valuation of their inner self.
+                    </p>
+                </section>
+
+                <!-- Paragraph 9 -->
+                <section id="para-9" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">9.</span>
+                        Conflating beauty privilege with genuine social respect creates significant interpersonal and societal misjudgments. While an attractive person may receive immediate social warmth, enthusiasm, or deference upon entering a room, this reaction should not be confused with true respect. Over-relying on visual appeal without developing core character traits can lead to a rapid collapse in social standing the moment high-stakes challenges require true wisdom, integrity, or emotional maturity.
+                    </p>
+                </section>
+
+                <!-- Paragraph 10 -->
+                <section id="para-10" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">10.</span>
+                        From an institutional perspective, recognizing the boundary between beauty privilege and respect is essential for building equitable social systems. Modern organizations are increasingly implementing standardized hiring practices, blind evaluations, and objective performance metrics to reduce lookism bias. By consciously separating aesthetic appeal from professional evaluation, institutions foster environments where social respect and advancement are grounded strictly in merit, ethical conduct, and genuine capability.
+                    </p>
+                </section>
+
+                <!-- Paragraph 11 -->
+                <section id="para-11" class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition">
+                    <p class="leading-relaxed">
+                        <span class="text-3xl font-bold text-amber-600 dark:text-amber-400 float-left mr-3 leading-none font-sans">11.</span>
+                        Ultimately, while beauty privilege may open doors effortlessly and smooth initial social encounters, it remains a passive, superficial advantage. Authentic social respect stands as the true foundation of meaningful human relationships, enduring influence, and impactful leadership. Distinguishing between being admired for one's appearance and being valued for one's character empowers individuals and society to cultivate deeper, more sustainable, and fundamentally fairer human connections.
+                    </p>
+                </section>
+
+                <!-- Comparison Framework Table -->
+                <section id="comparison-table" class="mt-12 bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm font-sans">
+                    <div class="mb-6">
+                        <h2 class="font-serif text-2xl font-bold text-slate-900 dark:text-slate-100">
+                            Comparative Framework
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                            A structured breakdown comparing visual leverage against earned character capital.
+                        </p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                            <thead>
+                                <tr class="border-b border-slate-200 dark:border-slate-800 uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                                    <th class="py-3 px-4 font-semibold">Parameter</th>
+                                    <th class="py-3 px-4 font-semibold text-amber-700 dark:text-amber-400 bg-amber-500/5 rounded-t-lg">Beauty Privilege</th>
+                                    <th class="py-3 px-4 font-semibold text-indigo-700 dark:text-indigo-400 bg-indigo-500/5 rounded-t-lg">Social Respect</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 dark:divide-slate-800/60 text-slate-700 dark:text-slate-300">
+                                <tr>
+                                    <td class="py-4 px-4 font-semibold text-slate-900 dark:text-slate-200">Origin & Acquisition</td>
+                                    <td class="py-4 px-4 bg-amber-500/5">Passive; granted automatically based on genetic alignment with current visual standards.</td>
+                                    <td class="py-4 px-4 bg-indigo-500/5">Active; built intentionally over time through conduct, skill, and moral integrity.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-semibold text-slate-900 dark:text-slate-200">Primary Mechanism</td>
+                                    <td class="py-4 px-4 bg-amber-500/5">Halo Effect heuristic; subconscious cognitive bias projecting general competence.</td>
+                                    <td class="py-4 px-4 bg-indigo-500/5">Demonstrated reliability, ethical consistency, and tangible contribution to community.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-semibold text-slate-900 dark:text-slate-200">Durability & Lifespan</td>
+                                    <td class="py-4 px-4 bg-amber-500/5">Transient; vulnerable to aging, shifting beauty trends, and physical changes.</td>
+                                    <td class="py-4 px-4 bg-indigo-500/5">Enduring; persists independently of physical appearance, age, or visual trends.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-semibold text-slate-900 dark:text-slate-200">Relational Quality</td>
+                                    <td class="py-4 px-4 bg-amber-500/5">Often surface-level or transactional; vulnerable to status-seeking motives.</td>
+                                    <td class="py-4 px-4 bg-indigo-500/5">Deep, authentic, and durable; anchored in psychological safety and mutual trust.</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-semibold text-slate-900 dark:text-slate-200">Social Capital Type</td>
+                                    <td class="py-4 px-4 bg-amber-500/5">Aesthetic capital; reduces initial friction but lacks structural stability.</td>
+                                    <td class="py-4 px-4 bg-indigo-500/5">Moral & competence capital; grants long-term authority and genuine leadership.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Academic References Section -->
+                <section id="references" class="mt-12 bg-slate-100 dark:bg-slate-900/80 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 font-sans">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <svg class="w-6 h-6 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                        <h2 class="font-serif text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100">
+                            Academic References & Empirical Sources
+                        </h2>
+                    </div>
+
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">
+                        Full citations of peer-reviewed studies referenced in this article. Click any citation tag above to inspect the corresponding source.
+                    </p>
+
+                    <ol class="space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300 list-none">
+
+                        <li id="cite-lookism" class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 transition duration-300">
+                            <span class="inline-block bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 font-bold px-2 py-0.5 rounded text-xs mr-2">[1]</span>
+                            <span class="font-semibold text-slate-900 dark:text-slate-100">Mason, A. (2023).</span> "Lookism: An Acceptable Discrimination?" <em>Philosophy</em>, Cambridge University Press.
+                            <p class="text-slate-500 dark:text-slate-400 text-xs mt-1.5 leading-relaxed">
+                                Philosophical examination detailing how aesthetic discrimination ("lookism") operates as a systemic form of social privilege comparable to structural economic advantages.
+                            </p>
+                        </li>
+
+                        <li id="cite-dion" class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 transition duration-300">
+                            <span class="inline-block bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 font-bold px-2 py-0.5 rounded text-xs mr-2">[2]</span>
+                            <span class="font-semibold text-slate-900 dark:text-slate-100">Dion, K., Berscheid, E., & Walster, E. (1972).</span> "What is beautiful is good." <em>Journal of Personality and Social Psychology</em>, 24(3), 285–290.
+                            <p class="text-slate-500 dark:text-slate-400 text-xs mt-1.5 leading-relaxed">
+                                Landmark empirical study demonstrating that attractive individuals are systematically assumed to possess superior moral, social, and professional traits across early childhood and adult life.
+                            </p>
+                        </li>
+
+                        <li id="cite-thorndike" class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 transition duration-300">
+                            <span class="inline-block bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 font-bold px-2 py-0.5 rounded text-xs mr-2">[3]</span>
+                            <span class="font-semibold text-slate-900 dark:text-slate-100">Thorndike, E. L. (1920).</span> "A constant error in psychological ratings." <em>Journal of Applied Psychology</em>, 4(1), 25–29.
+                            <p class="text-slate-500 dark:text-slate-400 text-xs mt-1.5 leading-relaxed">
+                                The foundational psychological paper establishing the concept of the "Halo Effect"—the tendency for an overall positive impression in one trait (e.g., appearance) to influence judgments in unrelated domains.
+                            </p>
+                        </li>
+
+                        <li id="cite-nisbett" class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 transition duration-300">
+                            <span class="inline-block bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 font-bold px-2 py-0.5 rounded text-xs mr-2">[4]</span>
+                            <span class="font-semibold text-slate-900 dark:text-slate-100">Nisbett, R. E., & Wilson, T. D. (1977).</span> "The halo effect: Evidence for unconscious alteration of judgments." <em>Journal of Personality and Social Psychology</em>, 35(4), 250–256.
+                            <p class="text-slate-500 dark:text-slate-400 text-xs mt-1.5 leading-relaxed">
+                                Proves through experimental trials that observers remain completely unaware that physical warmth and attractiveness are altering their cognitive evaluations of competence and character.
+                            </p>
+                        </li>
+
+                        <li id="cite-doorley" class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 transition duration-300">
+                            <span class="inline-block bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 font-bold px-2 py-0.5 rounded text-xs mr-2">[5]</span>
+                            <span class="font-semibold text-slate-900 dark:text-slate-100">Doorley, R., & Sierminska, E. (2015).</span> "Myth or reality? The beauty premium in the labor market." <em>IZA World of Labor</em>, 138.
+                            <p class="text-slate-500 dark:text-slate-400 text-xs mt-1.5 leading-relaxed">
+                                Labor economics report analyzing wage disparity data and showing statistically significant earning premiums and promotion rates tied to physical attractiveness across modern industries.
+                            </p>
+                        </li>
+
+                    </ol>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-500 dark:text-slate-400 text-xs py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-sans">
+            <p>© 2026 Social Perspectives Journal. Content formatted for educational analysis.</p>
+            <div class="flex items-center space-x-4">
+                <a href="#para-1" class="hover:underline text-amber-600 dark:text-amber-400 font-medium">Back to Top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts for UI Interactions -->
+    <script>
+        // Reading Progress Bar Indicator
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Dark Mode Toggle Logic
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Font Size Adjuster Logic
+        function setFontSize(size) {
+            const content = document.getElementById('reading-content');
+            content.classList.remove('reading-font-sm', 'reading-font-md', 'reading-font-lg');
+            
+            // Reset button active styles
+            document.getElementById('font-sm').className = "px-2.5 py-1 rounded hover:bg-white dark:hover:bg-slate-700 transition";
+            document.getElementById('font-md').className = "px-2.5 py-1 rounded hover:bg-white dark:hover:bg-slate-700 transition";
+            document.getElementById('font-lg').className = "px-2.5 py-1 rounded hover:bg-white dark:hover:bg-slate-700 transition";
+
+            if (size === 'sm') {
+                content.classList.add('reading-font-sm');
+                document.getElementById('font-sm').className = "px-2.5 py-1 rounded bg-white dark:bg-slate-700 shadow-sm text-amber-600 dark:text-amber-400 font-bold transition";
+            } else if (size === 'md') {
+                content.classList.add('reading-font-md');
+                document.getElementById('font-md').className = "px-2.5 py-1 rounded bg-white dark:bg-slate-700 shadow-sm text-amber-600 dark:text-amber-400 font-bold transition";
+            } else if (size === 'lg') {
+                content.classList.add('reading-font-lg');
+                document.getElementById('font-lg').className = "px-2.5 py-1 rounded bg-white dark:bg-slate-700 shadow-sm text-amber-600 dark:text-amber-400 font-bold transition";
+            }
+        }
+
+        // Citation Smooth Scroll & Highlight
+        function scrollToCitation(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                element.classList.add('citation-highlight');
+                setTimeout(() => {
+                    element.classList.remove('citation-highlight');
+                }, 2500);
+            }
+        }
+
+        // Initial Theme Detection
+        (function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
+</body>
+</html>
